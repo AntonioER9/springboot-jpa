@@ -22,7 +22,9 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		List<Person> persons = (List<Person>) repository.findAll(); // findAll() returns an Iterable, so we cast it to List
+		// List<Person> persons = (List<Person>) repository.findAll(); // findAll()
+		// returns an Iterable, so we cast it to List
+		List<Person> persons = (List<Person>) repository.searchByProgrammingLanguage("Java", "Andres");
 		persons.stream().forEach(person -> System.out.println(person));
 	}
 
