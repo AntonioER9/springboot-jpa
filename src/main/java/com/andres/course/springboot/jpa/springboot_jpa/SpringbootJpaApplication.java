@@ -1,6 +1,7 @@
 package com.andres.course.springboot.jpa.springboot_jpa;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -26,6 +27,19 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// returns an Iterable, so we cast it to List
 		List<Person> persons = (List<Person>) repository.searchByProgrammingLanguage("Java", "Andres");
 		persons.stream().forEach(person -> System.out.println(person));
+	}
+
+	public void findOne() {
+
+		Person person = null;
+		Optional<Person> optionalPerson = repository.findById(1L);
+		if (optionalPerson.isPresent()) {
+			person = optionalPerson.get();
+		}
+		System.out.println(person);
+		// repository.findOneName("Andres").ifPresent(person ->
+		// System.out.println(person));
+		repository.findOneName("Andres").ifPresent(System.out::println);
 	}
 
 }
