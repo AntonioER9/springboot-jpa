@@ -30,7 +30,28 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// List<Person> persons = (List<Person>)
 		// repository.searchByProgrammingLanguage("Java", "Andres");
 		// persons.stream().forEach(person -> System.out.println(person));
-		create();
+		// create();
+		update();
+	}
+
+	@Transactional
+	public void update() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter the id of the person you want to update: ");
+		Long id = scanner.nextLong();
+
+		Optional<Person> optionalPerson = repository.findById(id);
+
+		optionalPerson.ifPresent(person -> {
+			System.out.println(person);
+			System.out.println("Enter the programming language: ");
+			String programmingLanguage = scanner.next();
+			person.setProgrammingLanguage(programmingLanguage);
+			Person personDb = repository.save(person);
+			System.out.println(personDb);
+		});
+
+		scanner.close();
 	}
 
 	@Transactional
