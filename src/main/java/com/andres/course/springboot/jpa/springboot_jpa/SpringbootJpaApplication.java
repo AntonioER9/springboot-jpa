@@ -32,7 +32,17 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// persons.stream().forEach(person -> System.out.println(person));
 		// create();
 		// update();
-		delete();
+		// delete();
+		personalizedQueries2();
+	}
+
+	@Transactional
+	public void personalizedQueries2() {
+		List<Object[]> personsRegs = repository.findAllMixPerson();
+
+		personsRegs.forEach(reg -> {
+			System.out.println("programmingLanguage: " + reg[1] + ", person: " + reg[0]);
+		});
 	}
 
 	@Transactional

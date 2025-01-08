@@ -9,6 +9,12 @@ import java.util.Optional;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
+  @Query("SELECT p.name FROM Person p WHERE p.id = ?1")
+  String getNameById(Long id);
+
+  @Query("SELECT p p.programmingLanguage FROM Person p")
+  List<Object[]> findAllMixPerson();
+
   @Query("SELECT p FROM Person p WHERE p.id = ?1")
   Optional<Person> findOne(Long id);
 
